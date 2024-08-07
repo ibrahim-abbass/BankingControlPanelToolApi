@@ -32,5 +32,9 @@ namespace BCPT.ABSTACTION
                 }
             );
         }
+
+        public DbSet<ClientDto> Clients { get; set; }
+        public DbSet<AddressDto> Addresses { get; set; }
+        public DbSet<AccountDto> Accounts { get; set; }
     }
 }
