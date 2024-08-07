@@ -1,19 +1,35 @@
 using BCPT.ABSTACTION;
+using BCPT.BAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services
+    .AddDbContext<ApplicationDbContext>
+    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services
+    .AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services
     .AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services
+    .AddOptions<JwtOptions>()
+    .BindConfiguration("JwtOptions");
 
 var app = builder.Build();
 

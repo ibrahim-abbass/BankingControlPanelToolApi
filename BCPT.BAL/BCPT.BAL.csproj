@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BCPT.ABSTACTION\BCPT.ABSTACTION.csproj" />
+  </ItemGroup>
+
 </Project>

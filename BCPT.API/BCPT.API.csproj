@@ -18,11 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BCPT.ABSTACTION\BCPT.ABSTACTION.csproj" />
+    <ProjectReference Include="..\BCPT.BAL\BCPT.BAL.csproj" />
   </ItemGroup>
 
 </Project>
