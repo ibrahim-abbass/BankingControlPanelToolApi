@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BCPT.API", "BCPT.API\BCPT.API.csproj", "{AD32942C-0148-499C-8186-28EE4AE16C3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD32942C-0148-499C-8186-28EE4AE16C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD32942C-0148-499C-8186-28EE4AE16C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD32942C-0148-499C-8186-28EE4AE16C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD32942C-0148-499C-8186-28EE4AE16C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3AECB861-66A4-4E68-96D2-30B28BAAB96F}
+	EndGlobalSection
+EndGlobal
