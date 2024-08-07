@@ -21,4 +21,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BCPT.ABSTACTION\BCPT.ABSTACTION.csproj" />
+  </ItemGroup>
+
 </Project>
