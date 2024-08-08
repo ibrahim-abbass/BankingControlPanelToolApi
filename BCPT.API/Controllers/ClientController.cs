@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BCPT.API.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class ClientController : ControllerBase
     {
         private readonly IClientService _clientService;

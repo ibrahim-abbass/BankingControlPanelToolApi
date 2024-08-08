@@ -1,11 +1,17 @@
 using BCPT.ABSTACTION;
 using BCPT.BAL;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
 
 builder.Services
     .AddControllers()
@@ -17,8 +23,8 @@ builder.Services
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services
-    .AddDbContext<ApplicationDbContext>
-    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+.AddDbContext<ApplicationDbContext>
+    (options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services
     .AddScoped<IAuthenticationService, AuthenticationService>()
@@ -27,6 +33,27 @@ builder.Services
 builder.Services
     .AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = configuration["JwtOptions:Issuer"],
+            ValidAudience = configuration["JwtOptions:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:Secret"]))
+        };
+    });
 
 builder.Services
     .AddOptions<JwtOptions>()
@@ -75,6 +102,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
