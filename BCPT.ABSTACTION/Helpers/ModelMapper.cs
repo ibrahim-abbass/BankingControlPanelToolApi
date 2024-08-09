@@ -6,11 +6,11 @@ namespace BCPT.ABSTACTION
 {
     public class ModelMapper
     {
-        public static Client MapInsertClient(InsertClientRequest clientRequest)
+        public static Client MapInsertClient(AddClientRequest clientRequest)
         {
             var config = new MapperConfiguration((cfg) =>
             {
-                cfg.CreateMap<InsertClientRequest, Client>();
+                cfg.CreateMap<AddClientRequest, Client>();
                 cfg.CreateMap<AccountDto, Account>();
                 cfg.CreateMap<AddressDto, Address>();
             });
@@ -18,7 +18,7 @@ namespace BCPT.ABSTACTION
             var Mapper = config.CreateMapper();
             return Mapper.Map<Client>(clientRequest);
         }
-        public static Client MapUpdateClient(UpdateClientRequest clientRequest, Client client)
+        public static Client MapUpdateClient(UpdateClientRequest clientRequest, Client clientDto)
         {
             var config = new MapperConfiguration((cfg) =>
             {
@@ -81,7 +81,18 @@ namespace BCPT.ABSTACTION
             });
 
             var Mapper = config.CreateMapper();
-            return Mapper.Map(clientRequest, client);
+            return Mapper.Map(clientRequest, clientDto);
+        }
+        public static History MapAddHistory(AddHistoryRequest historyRequest)
+        {
+            var config = new MapperConfiguration((cfg) =>
+            {
+                cfg.CreateMap<AddHistoryRequest, History>()
+                .ForMember(dest => dest.SearchDate, opt => opt.MapFrom(src => DateTime.Now));
+            });
+
+            var Mapper = config.CreateMapper();
+            return Mapper.Map<History>(historyRequest);
         }
     }
 }

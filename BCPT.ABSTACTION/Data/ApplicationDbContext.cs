@@ -37,5 +37,6 @@ namespace BCPT.ABSTACTION
         public DbSet<Client> Clients { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<History> Histories { get; set; }
     }
 }

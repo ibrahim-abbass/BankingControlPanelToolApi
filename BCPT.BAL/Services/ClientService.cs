@@ -11,12 +11,12 @@ namespace BCPT.BAL
     public class ClientService : IClientService
     {
         private ApplicationDbContext _context;
-        #region Public
         public ClientService(ApplicationDbContext context)
         {
             this._context = context;
         }
-        public async Task<Response> AddClient(InsertClientRequest insertClient)
+        #region Public
+        public async Task<Response> AddClient(AddClientRequest insertClient)
         {
             var isUserExist = _context.Clients
                 .Any(dbc => dbc.Email.ToUpper() == insertClient.Email.ToUpper());

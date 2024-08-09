@@ -9,7 +9,7 @@ namespace BCPT.BAL
 {
     public interface IClientService
     {
-        Task<Response> AddClient(InsertClientRequest client);
+        Task<Response> AddClient(AddClientRequest client);
         Task<Response<ICollection<Client>>> GetClients();
         Task<Response<ICollection<Client>>> FilterClients(FilterRequest filter);
         Task<Response<ICollection<Client>>> SortClients(string sortBy, bool isAsc);

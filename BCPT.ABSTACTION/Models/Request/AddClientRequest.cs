@@ -2,7 +2,7 @@
 
 namespace BCPT.ABSTACTION
 {
-    public class InsertClientRequest
+    public class AddClientRequest
     {
         [Required]
         [StringLength(60, MinimumLength = 1, ErrorMessage = "The {0} must be between {2} and {1}")]

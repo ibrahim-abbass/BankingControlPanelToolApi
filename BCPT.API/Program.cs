@@ -28,7 +28,8 @@ builder.Services
 
 builder.Services
     .AddScoped<IAuthenticationService, AuthenticationService>()
-    .AddScoped<IClientService, ClientService>();
+    .AddScoped<IClientService, ClientService>()
+    .AddScoped<IHistoryService, HistoryService>();
 
 builder.Services
     .AddIdentity<IdentityUser, IdentityRole>()

@@ -3,6 +3,7 @@ using BCPT.BAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace BCPT.API.Controllers
@@ -12,10 +13,12 @@ namespace BCPT.API.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientService _clientService;
+        private readonly IHistoryService _historyService;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService clientService, IHistoryService historyService)
         {
             this._clientService = clientService;
+            this._historyService = historyService;
         }
 
         [HttpGet]
@@ -57,6 +60,16 @@ namespace BCPT.API.Controllers
                     PageNumber = pageNumber,
                     PageSize = pageSize
                 });
+
+                var s = JsonConvert.SerializeObject(clientfilterResponse);
+
+                await _historyService.AddHistory(new AddHistoryRequest()
+                {
+                    SearchParameter = filterValue,
+                    SearchProperty = string.IsNullOrEmpty(filterBy) || !filterBy.IsValidProperty() ? "All" : filterBy.GetProperty(),
+                    SearchResult = JsonConvert.SerializeObject(clientfilterResponse)
+                });
+
                 return StatusCode((int)clientfilterResponse.Code, clientfilterResponse);
             }
             catch (Exception ex)
@@ -98,7 +111,7 @@ namespace BCPT.API.Controllers
         [ProducesResponseType(statusCode: StatusCodes.Status201Created, Type = typeof(Response))]
         [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest, Type = typeof(Response))]
         [ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError, Type = typeof(Response))]
-        public async Task<IActionResult> AddClient([FromBody] InsertClientRequest client)
+        public async Task<IActionResult> AddClient([FromBody] AddClientRequest client)
         {
             try
             {
