@@ -11,14 +11,16 @@ namespace BCPT.ABSTACTION
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (Enum.TryParse<Role>(value.ToString(), out var result))
+            if (value != null &&
+                !string.IsNullOrEmpty(value.ToString()) &&
+                !string.IsNullOrWhiteSpace(value.ToString()))
             {
-                return ValidationResult.Success;
+                if (Enum.TryParse<Role>(value.ToString(), out var result))
+                {
+                    return ValidationResult.Success;
+                }
             }
-            else
-            {
-                return new ValidationResult(ErrorMessage);
-            }
+            return new ValidationResult(ErrorMessage);
 
         }
     }

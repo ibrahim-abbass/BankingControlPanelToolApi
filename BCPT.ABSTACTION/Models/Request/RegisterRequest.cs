@@ -22,7 +22,7 @@ namespace BCPT.ABSTACTION
         public string? ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]
-        [CustomRoleValidation]
+        [CustomRoleValidation(ErrorMessage = "Role must be Admin or User")]
         public string Role { get; set; }
     }
 }

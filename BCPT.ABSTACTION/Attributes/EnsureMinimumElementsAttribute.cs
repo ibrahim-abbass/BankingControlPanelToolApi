@@ -18,7 +18,7 @@ namespace BCPT.ABSTACTION
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var list = value as List<Account>;
+            var list = value as List<AccountDto>;
 
             if (list == null || list.Count < _minimumElements)
             {

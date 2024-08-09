@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BCPT.ABSTACTION
 {
-    public class ClientDto
+    public class Client
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,14 +17,14 @@ namespace BCPT.ABSTACTION
 
         public string PersonalId { get; set; }
 
-        public string MobileNumber { get; set; }
+        public string? MobileNumber { get; set; }
 
         public string Sex { get; set; }
 
-        public string ProfilePhoto { get; set; }
+        public string? ProfilePhoto { get; set; }
 
-        public AddressDto Address { get; set; }
+        public Address? Address { get; set; }
 
-        public List<AccountDto> Accounts { get; set; }
+        public virtual List<Account> Accounts { get; set; }
     }
 }

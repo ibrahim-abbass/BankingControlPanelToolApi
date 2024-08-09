@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace BCPT.ABSTACTION
 {
@@ -11,7 +12,7 @@ namespace BCPT.ABSTACTION
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //Add Admin and User roles while creating the AspNetRoles table
+
             SeedRoles(builder);
         }
 
@@ -33,8 +34,8 @@ namespace BCPT.ABSTACTION
             );
         }
 
-        public DbSet<ClientDto> Clients { get; set; }
-        public DbSet<AddressDto> Addresses { get; set; }
-        public DbSet<AccountDto> Accounts { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

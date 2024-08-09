@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BCPT.ABSTACTION
 {
@@ -11,15 +6,16 @@ namespace BCPT.ABSTACTION
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (Enum.TryParse<Gender>(value.ToString(), out var result))
+            if (value != null &&
+                !string.IsNullOrEmpty(value.ToString()) &&
+                !string.IsNullOrWhiteSpace(value.ToString()))
             {
-                return ValidationResult.Success;
+                if (Enum.TryParse<Gender>(value.ToString().ToTitleCase(), out var result))
+                    return ValidationResult.Success;
+                else
+                    return new ValidationResult(ErrorMessage);
             }
-            else
-            {
-                return new ValidationResult(ErrorMessage);
-            }
-
+            return ValidationResult.Success;
         }
     }
 }

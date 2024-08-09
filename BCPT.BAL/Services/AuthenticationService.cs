@@ -30,13 +30,21 @@ namespace BCPT.BAL
         #region Public
         public async Task<RegisterResponse> Register(RegisterRequest registerRequest)
         {
-            var userExist = await _userManager.FindByEmailAsync(registerRequest.Email);
-
-            if (userExist != null)
+            var userExistByEmail = await _userManager.FindByEmailAsync(registerRequest.Email);
+            if (userExistByEmail != null)
                 return new RegisterResponse()
                 {
                     Code = HttpStatusCode.Forbidden,
-                    Message = ErrorMessage.UserExist,
+                    Message = string.Format(ErrorMessage.UserExist, "Email"),
+                    Status = Status.Error
+                };
+
+            var userExistByUserName = await _userManager.FindByNameAsync(registerRequest.Username);
+            if (userExistByUserName != null)
+                return new RegisterResponse()
+                {
+                    Code = HttpStatusCode.Forbidden,
+                    Message = string.Format(ErrorMessage.UserExist, "Username"),
                     Status = Status.Error
                 };
 
@@ -64,7 +72,7 @@ namespace BCPT.BAL
                 return new RegisterResponse()
                 {
                     Code = HttpStatusCode.Created,
-                    Message = SuccessMessage.UserCreated,
+                    Message = string.Format(SuccessMessage.UserCreated, "User"),
                     Status = Status.Success,
                 };
             }
@@ -127,7 +135,7 @@ namespace BCPT.BAL
             return new JwtSecurityToken(
                 issuer: _jwtOptions.Issuer,
                 audience: _jwtOptions.Audience,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddHours(_jwtOptions.Expiration),
                 claims: claims,
                 signingCredentials: new SigningCredentials(authSingingKey, SecurityAlgorithms.HmacSha256));
         }

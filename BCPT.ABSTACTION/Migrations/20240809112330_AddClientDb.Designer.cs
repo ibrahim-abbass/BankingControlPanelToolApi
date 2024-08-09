@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BCPT.ABSTACTION.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240807185833_AddClient")]
-    partial class AddClient
+    [Migration("20240809112330_AddClientDb")]
+    partial class AddClientDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace BCPT.ABSTACTION.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BCPT.ABSTACTION.AccountDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace BCPT.ABSTACTION.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("ClientId")
+                    b.Property<Guid>("ClientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -47,7 +47,7 @@ namespace BCPT.ABSTACTION.Migrations
                     b.ToTable("Accounts");
                 });
 
-            modelBuilder.Entity("BCPT.ABSTACTION.AddressDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace BCPT.ABSTACTION.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("BCPT.ABSTACTION.ClientDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Client", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,14 +147,14 @@ namespace BCPT.ABSTACTION.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e10bdfab-05d5-42e6-87d7-b45cb262c22a",
+                            Id = "a41c84fb-be30-4add-b731-620b7eb22b87",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "31717a6c-4a32-4803-bed3-4e83786a1ecd",
+                            Id = "6da60889-b42e-46cf-a5e7-eec29d5341a0",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
@@ -332,16 +332,18 @@ namespace BCPT.ABSTACTION.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BCPT.ABSTACTION.AccountDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Account", b =>
                 {
-                    b.HasOne("BCPT.ABSTACTION.ClientDto", null)
+                    b.HasOne("BCPT.ABSTACTION.Client", null)
                         .WithMany("Accounts")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("BCPT.ABSTACTION.ClientDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Client", b =>
                 {
-                    b.HasOne("BCPT.ABSTACTION.AddressDto", "Address")
+                    b.HasOne("BCPT.ABSTACTION.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,7 +403,7 @@ namespace BCPT.ABSTACTION.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BCPT.ABSTACTION.ClientDto", b =>
+            modelBuilder.Entity("BCPT.ABSTACTION.Client", b =>
                 {
                     b.Navigation("Accounts");
                 });

@@ -8,7 +8,11 @@ namespace BCPT.ABSTACTION
 {
     public static class SuccessMessage
     {
-        public static string UserCreated = "User created successfuly";
+        public static string UserCreated = "{0} created successfuly";
         public static string Loginsuccessfully = "Login successfully";
+        public static string RetreiveClients = "Clients returned successfully";
+        public static string NoClientFound = "No client found";
+        public static string Deleted = "Client deleted successfully";
+        public static string Updated = "Client updated successfully";
     }
 }

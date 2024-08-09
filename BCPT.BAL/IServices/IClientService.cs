@@ -9,9 +9,11 @@ namespace BCPT.BAL
 {
     public interface IClientService
     {
-        ICollection<ClientDto> GetClients();
-        ClientDto GetClientByIdentifier(string identifier);
-        bool DeleteClient(Guid clientId);
-        ClientDto UpdateClient(Guid clientId, Client client);
+        Task<Response> AddClient(InsertClientRequest client);
+        Task<Response<ICollection<Client>>> GetClients();
+        Task<Response<ICollection<Client>>> FilterClients(FilterRequest filter);
+        Task<Response<ICollection<Client>>> SortClients(string sortBy, bool isAsc);
+        Task<Response> DeleteClient(Guid id);
+        Task<Response> UpdateClient(Guid id, UpdateClientRequest client);
     }
 }

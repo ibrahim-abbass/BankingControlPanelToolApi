@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BCPT.ABSTACTION.Migrations
 {
-    public partial class AddClient : Migration
+    public partial class AddClientDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,7 @@ namespace BCPT.ABSTACTION.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -75,18 +75,19 @@ namespace BCPT.ABSTACTION.Migrations
                         name: "FK_Accounts_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "31717a6c-4a32-4803-bed3-4e83786a1ecd", "2", "User", "User" });
+                values: new object[] { "6da60889-b42e-46cf-a5e7-eec29d5341a0", "2", "User", "User" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e10bdfab-05d5-42e6-87d7-b45cb262c22a", "1", "Admin", "Admin" });
+                values: new object[] { "a41c84fb-be30-4add-b731-620b7eb22b87", "1", "Admin", "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_ClientId",
@@ -113,12 +114,12 @@ namespace BCPT.ABSTACTION.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "31717a6c-4a32-4803-bed3-4e83786a1ecd");
+                keyValue: "6da60889-b42e-46cf-a5e7-eec29d5341a0");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "e10bdfab-05d5-42e6-87d7-b45cb262c22a");
+                keyValue: "a41c84fb-be30-4add-b731-620b7eb22b87");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
