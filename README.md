@@ -11,16 +11,16 @@ The Authorization Controller in this API handles user authentication and registr
 ## Client Controller
 The Client Controller in this API handles CRUD operations for managing clients in the banking system.
 ### Endpoints
-- `/Client/clients`: Retrieve all clients.
-- `/Client/filter?filterValue=aaa&filterBy=firstname&pageNumber=1&pageSize=10`: Filter clients based on the filter value and filter by, in case filter by is null it will filter on all column.
-- `/Client/sort?sortBy=id&isAsc=true`: Sort clients
-- `/Client`: [POST] add client
-- `/Client/{id}` [PATCH] update client based on the client id
-- `/Client/{id}` [Delete] delete client based on the client id
+- `/Client/clients`: GET Retrieve all clients.
+- `/Client/filter?filterValue=xxx&filterBy=yyy&pageNumber=1&pageSize=10`: GET Filter clients based on the filter value and filter by, in case filter by is null it will filter on all column.
+- `/Client/sort?sortBy=id&isAsc=true`: GET Sort clients
+- `/Client`: POST add client
+- `/Client/{id}` PATCH update client based on the client id
+- `/Client/{id}` Delete delete client based on the client id
 
 ## History Controller
 The History Controller in this API provides a service for retrieving suggestions.
-###Endpoint
+### Endpoint
 - `/History/suggestions?top=n`: GET request to retrieve top n suggestions for history, by default n is 3.
   
 ## Getting Started
