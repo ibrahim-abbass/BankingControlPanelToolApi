@@ -26,15 +26,15 @@ Two roles have been added during model creation:
 
 The Authorization Controller in this API handles user authentication and registration. It provides endpoints for user login and registration.
 
-### Endpoints
+#### Endpoints
 - `/Authentication/register`: POST request to register a new user, new user must have new name and email, (name , email) are primary keys.
 - `/Authentication/login`: POST request to authenticate a  user and retrun a token.
 
-## Client Controller
+### Client Controller
 
 The Client Controller in this API handles CRUD operations for managing clients in the banking system.
 
-### Endpoints
+#### Endpoints
 - `/Client/clients`: GET Retrieve all clients, users with role admin and user can access it.
 - `/Client/filter?filterValue=xxx&filterBy=yyy&pageNumber=1&pageSize=10`: GET Filter clients based on the filter value and filter by, in case filter by is null it will filter on all column, users with role admin and user can access it.
 - `/Client/sort?sortBy=id&isAsc=true`: GET Sort clients, but default it will be sort by ascending, users with role admin and user can access it.
@@ -42,11 +42,11 @@ The Client Controller in this API handles CRUD operations for managing clients i
 - `/Client/{id}` PATCH update client based on the client id, jsut user with admin role can create a client.
 - `/Client/{id}` Delete delete client based on the client id, jsut user with admin role can create a client.
 
-## History Controller
+### History Controller
 
 The History Controller in this API provides a service for retrieving suggestions.
 
-### Endpoint
+#### Endpoint
 - `/History/suggestions?top=n`: GET request to retrieve top n suggestions for history, by default n is 3, , jsut user with admin role can create a client.
   
 ## Getting Started
